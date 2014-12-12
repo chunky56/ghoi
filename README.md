@@ -1,0 +1,1 @@
+A project to learn the inner workings of AngularJS.
