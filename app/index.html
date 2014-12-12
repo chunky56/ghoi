@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>GitHub Owner Images</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles/app.css">
+</head>
+
+<body data-ng-app="GitHubOwnerImageApp" data-ng-controller="ownersController as ctrl">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>GitHub Owner Images</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Circular images with a red border have names (logins) starting with 'a' or 'A'</h3>
+            </div>
+            <div class="col-md-8">
+                <h4 data-ng-show="loading"><i class="fa fa-cog fa-spin"></i> Loading...</h4>
+                <span data-ng-repeat="owner in ownersList">
+                    <span data-ng-show="ctrl.startsWithAIgnoreCase(owner.login)"><img data-ng-src="{{owner.avatarUrl}}" class="img-small img-circle img-special" popover-title="{{owner.login}}'s followers" popover="{{ctrl.hasFollowers(owner)}}" popover-trigger="mouseenter" popover-placement="bottom" /></span>
+                    <span data-ng-show="!ctrl.startsWithAIgnoreCase(owner.login)"><img data-ng-src="{{owner.avatarUrl}}" class="img-small" popover="{{owner.login}}" popover-trigger="mouseenter" popover-placement="bottom" /></span>
+                </span>
+                <div data-ng-show="errorObj.error">{{errorObj.errorMessage}}</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.4/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/services/githubService.js"></script>
+    <script src="scripts/controllers/ownersController.js"></script>
+</body>
+
+</html>
